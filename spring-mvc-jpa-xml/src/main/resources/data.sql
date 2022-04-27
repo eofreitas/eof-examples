@@ -1,0 +1,1 @@
+INSERT INTO db_user(name) VALUES ('Eduardo Freitas');
