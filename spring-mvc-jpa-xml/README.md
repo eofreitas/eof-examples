@@ -1,8 +1,8 @@
 # Spring 5 MVC, Spring Data JPA, Configuração XML
 
-Devido a dificuldade que muitos desenvolvedores encontram ao configurar o Spring por meio de configuração XML, é apresentado neste exemplo o passo a passo de como realizar a configuração XML de um projeto Spring MVC com Spring Data JPA.
+Devido a dificuldade que muitos desenvolvedores encontram ao configurar o Spring por meio de configuração XML, é apresentado neste exemplo o passo a passo de como realizar a configuração XML de um projeto Spring 5 MVC com Spring Data JPA.
 
-O objetivo do artigo não é comprar qual é a melhor forma de configuraço, seja por meio de configuração XML, seja por meio de configuração Java, seja por meio de configuração por anotações, e se apresentar um forma que que posso ser útil para diversos projetos.
+O objetivo do artigo não é discutir qual é a melhor forma de configurar um projeto Spring 5, e sim apresentar um modelo que pode ser útil em diversos projetos.
 
 ## POM.XML
 
