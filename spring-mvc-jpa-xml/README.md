@@ -7,36 +7,58 @@ O objetivo do artigo não é discutir qual é a melhor forma de configurar um pr
 ## POM.XML
 
 ```XML
-  <dependency>
-    <groupId>org.springframework</groupId>
-    <artifactId>spring-webmvc</artifactId>
-    <version>${org.springframework.version}</version>
-  </dependency>
+<dependency>
+  <groupId>org.springframework</groupId>
+  <artifactId>spring-webmvc</artifactId>
+  <version>5.3.19</version>
+</dependency>
 
-  <dependency>
-    <groupId>org.springframework.data</groupId>
-    <artifactId>spring-data-jpa</artifactId>
-    <version>2.6.3</version>
-  </dependency>
+<dependency>
+  <groupId>org.springframework.data</groupId>
+  <artifactId>spring-data-jpa</artifactId>
+  <version>2.6.4</version>
+</dependency>
 
-  <dependency>
-    <groupId>org.hibernate</groupId>
-    <artifactId>hibernate-core</artifactId>
-    <version>${org.hibernate.version}</version>
-  </dependency>
+<dependency>
+  <groupId>org.hibernate</groupId>
+  <artifactId>hibernate-core</artifactId>
+  <version>5.6.7.Final</version>
+</dependency>
 
-  <dependency>
-    <groupId>com.h2database</groupId>
-    <artifactId>h2</artifactId>
-    <version>2.1.210</version>
-    <scope>runtime</scope>
-  </dependency>
+<dependency>
+  <groupId>com.fasterxml.jackson.core</groupId>
+  <artifactId>jackson-databind</artifactId>
+  <version>2.13.2.2</version>
+</dependency>
+
+<dependency>
+  <groupId>com.h2database</groupId>
+  <artifactId>h2</artifactId>
+  <version>2.1.212</version>
+  <scope>runtime</scope>
+</dependency>
+
+<dependency>
+  <groupId>javax.servlet</groupId>
+  <artifactId>javax.servlet-api</artifactId>
+  <version>4.0.1</version>
+  <scope>provided</scope>
+</dependency>
+
+<dependency>
+  <groupId>javax.servlet</groupId>
+  <artifactId>jstl</artifactId>
+  <version>1.2</version>
+</dependency>
 ```
 
-* `spring-webmvc`
-* `spring-data-jpa`
-* `hibernate-core`
-* `h2`
+* `spring-webmvc:` 
+* `spring-data-jpa:` 
+* `hibernate-core:`
+* `jackson-databind:` 
+* `h2:`
+* `javax.servlet-api:`
+* `jstl:`
 
 ## Spring MVC
 
@@ -114,8 +136,7 @@ Para utlizar o JPA no Spring é preciso configurar o EntityManagerFactory. Fazen
 </bean>
 ```
 * `dataSource:` Configura o bean DataSource
-* `packagesToScan:` Configura a localização das entidades
-* * Com esse recurso não é mais necessário configurar a unidade de persistência em META-INF/persistence.xml 
+* `packagesToScan:` Configura a localização das entidades 
 * `jpaVendorAdapter:` Configura o Hibernate como o provedor de persistência padrão JPA
 * `jpaProperties:` Configura detalhes para o provedor de pesistência Hibernate
 
