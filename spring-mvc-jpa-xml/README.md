@@ -80,8 +80,8 @@ O objetivo do artigo não é discutir qual é a melhor forma de configurar um pr
   <url-pattern>/</url-pattern>
 </servlet-mapping>
 ```
-* `servlet:`
-* `servlet-mapping:`
+* `<servlet />:`
+* `<servlet-mapping />:`
 
 
 ### Dispatcher Context (dispatcher-context.xml)
