@@ -123,6 +123,8 @@ No DataSource é configurado a fonte de dados com o banco de dados embutido H2:
 </jdbc:embedded-database>
 ```
 
+* `<jdbc:embedded-database />:`
+
 ### EntityManagerFactory
 
 Para utlizar o JPA no Spring é preciso configurar o EntityManagerFactory. Fazendo uma anologia grosseira, o EntityManagerFactory é equivalente ao SessionFactory em uma configuração pura do Hibernate.
