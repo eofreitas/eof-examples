@@ -23,6 +23,11 @@ public class UserService {
 	public List<User> findAll() {
 		return repository.findAll();
 	}
+	
+	@Transactional(readOnly = true)
+	public List<User> findByName(String name) {
+		return repository.findByName(name);
+	}
 
 	@Transactional(readOnly = true)
 	public Optional<User> findById(Long id) {
