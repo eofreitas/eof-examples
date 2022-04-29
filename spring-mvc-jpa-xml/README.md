@@ -80,6 +80,9 @@ O objetivo do artigo não é discutir qual é a melhor forma de configurar um pr
   <url-pattern>/</url-pattern>
 </servlet-mapping>
 ```
+* `servlet:`
+* `servlet-mapping:`
+
 
 ### Dispatcher Context (dispatcher-context.xml)
 
@@ -98,6 +101,12 @@ O objetivo do artigo não é discutir qual é a melhor forma de configurar um pr
   <property name="suffix" value=".jsp" />
 </bean>
 ```
+
+* `<context:component-scan />:` 
+* `<context:annotation-config />:` 
+* `<mvc:annotation-driven />:`
+* `<mvc:view-controller />:` 
+* `viewResolver:`
 
 ## Spring Data JPA (persistence-context.xml)
 
