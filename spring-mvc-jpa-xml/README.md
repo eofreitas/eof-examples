@@ -117,10 +117,7 @@ O objetivo do artigo não é discutir qual é a melhor forma de configurar um pr
 No DataSource é configurado a fonte de dados com o banco de dados embutido H2: 
 
 ```XML
-<jdbc:embedded-database id="dataSource" type="H2">
-  <jdbc:script location="classpath:sql/schema.sql"/>
-  <jdbc:script location="classpath:sql/data.sql"/>
-</jdbc:embedded-database>
+<jdbc:embedded-database id="dataSource" type="H2" />
 ```
 
 * `<jdbc:embedded-database />:`
