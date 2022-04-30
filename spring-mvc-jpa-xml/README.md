@@ -137,7 +137,9 @@ Para utlizar o JPA no Spring é preciso configurar o EntityManagerFactory. Fazen
   </property>
   <property name="jpaProperties">
     <props>
-      <prop key="hibernate.dialect">org.hibernate.dialect.H2Dialect</prop> 
+      <prop key="hibernate.dialect">org.hibernate.dialect.H2Dialect</prop>
+      <prop key="hibernate.hbm2ddl.auto">create-drop</prop>
+      <prop key="hibernate.hbm2ddl.import_files">data.sql</prop>
       <prop key="hibernate.show_sql">true</prop>
     </props>
   </property>
