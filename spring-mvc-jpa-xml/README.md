@@ -1,10 +1,12 @@
 # Spring 5 MVC, Spring Data JPA, Configuração XML
 
-Devido a dificuldade que muitos desenvolvedores encontram ao configurar o Spring por meio de configuração XML, é apresentado neste exemplo o passo a passo de como realizar a configuração XML de um projeto Spring 5 MVC com Spring Data JPA.
+Devido a dificuldade que muitos desenvolvedores encontram ao configurar o Spring 5 por meio de configuração XML, é apresentado neste exemplo o passo a passo de como realizar a configuração XML de um projeto Spring 5 MVC com Spring Data JPA.
 
 O objetivo do artigo não é discutir qual é a melhor forma de configurar um projeto Spring 5, e sim apresentar um modelo que pode ser útil em diversos projetos.
 
 ## POM.XML
+
+É utilizado o Maven 3 para gerenciar as dependências: 
 
 ```XML
 <dependency>
@@ -52,17 +54,13 @@ O objetivo do artigo não é discutir qual é a melhor forma de configurar um pr
 </dependency>
 ```
 
-* `spring-webmvc:` 
-* `spring-data-jpa:` 
-* `hibernate-core:`
-* `jackson-databind:` 
-* `h2:`
-* `javax.servlet-api:`
-* `jstl:`
-
 ## Spring MVC
 
+Para o Spring MVC é configurado o DispatcherServlet e o WebApplicationContext.   
+
 ### DispatcherServlet (web.xml)
+
+O DispatcherServlet recebe todas as requisições HTTP e direciona para o controlador.  
 
 ```XML
 <servlet>
@@ -80,16 +78,15 @@ O objetivo do artigo não é discutir qual é a melhor forma de configurar um pr
   <url-pattern>/</url-pattern>
 </servlet-mapping>
 ```
-* `<servlet />:`
-* `<servlet-mapping />:`
-
+* Com a tag `<servlet />` é declarado o DispatcherServlet
+* Com a tag `<servlet-mapping />` é configurada a URL que será mapeada para o DispatcherServlet. 
 
 ### Dispatcher Context (dispatcher-context.xml)
 
-```XML
-<context:component-scan base-package="br.com.eof.examples" />	
+O WebApplicationContext é o contexto Spring específico para aplicações Web.
 
-<context:annotation-config />
+```XML
+<context:component-scan base-package="br.com.eof.examples" />
 
 <mvc:annotation-driven />
 	
@@ -102,15 +99,14 @@ O objetivo do artigo não é discutir qual é a melhor forma de configurar um pr
 </bean>
 ```
 
-* `<context:component-scan />:` 
-* `<context:annotation-config />:` 
-* `<mvc:annotation-driven />:`
+* A tag `<context:component-scan />` instrui para que seja detectado automaticamente as classes com anotações Spring. Habilita implicitamente `<context:annotation-config />` 
+* A tag `<mvc:annotation-driven />` habilita a configuração do Spring MVC
 * `<mvc:view-controller />:` 
 * `viewResolver:`
 
 ## Spring Data JPA (persistence-context.xml)
 
-É utilizado o Hibernate como provedor de persistência padrão do JPA. Nos próximos subintens será demostrado a configuração de cada bean.
+É utilizado o Hibernate como provedor de persistência padrão do JPA.
 
 ### DataSource
 
