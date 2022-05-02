@@ -53,12 +53,12 @@ O objetivo do artigo não é ensinar Spring 5 MVC, ou discutir qual é a melhor 
   <version>1.2</version>
 </dependency>
 ```
-
-## Spring MVC
+## Configuração
+### Spring MVC
 
 Em um projeto Spring MVC é configurado o DispatcherServlet e o WebApplicationContext.   
 
-### DispatcherServlet (web.xml)
+#### DispatcherServlet (web.xml)
 
 O DispatcherServlet recebe todas as requisições HTTP e direciona para o controlador.  
 
@@ -81,7 +81,7 @@ O DispatcherServlet recebe todas as requisições HTTP e direciona para o contro
 * Com a tag `<servlet />` é declarado o DispatcherServlet
 * Com a tag `<servlet-mapping />` é configurada a URL que será mapeada para o DispatcherServlet. 
 
-### Dispatcher Context (dispatcher-context.xml)
+#### Dispatcher Context (dispatcher-context.xml)
 
 O WebApplicationContext é o contexto Spring específico para aplicações Web.
 
@@ -94,9 +94,9 @@ O WebApplicationContext é o contexto Spring específico para aplicações Web.
 * A tag `<context:component-scan />` instrui para que seja detectado automaticamente as classes com anotações Spring. Habilita implicitamente `<context:annotation-config />` 
 * A tag `<mvc:annotation-driven />` habilita a configuração do Spring MVC
 
-## Spring Data JPA (persistence-context.xml)
+### Spring Data JPA (persistence-context.xml)
 
-### DataSource
+#### DataSource
 
 No DataSource é configurado a fonte de dados com o banco de dados embutido H2: 
 
@@ -106,7 +106,7 @@ No DataSource é configurado a fonte de dados com o banco de dados embutido H2:
 
 * A tag `<jdbc:embedded-database />` cria o banco de dados embutido e disponibiliza para o container Spring como um bean do tipo javax.sql.DataSource 
 
-### EntityManagerFactory
+#### EntityManagerFactory
 
 Para utlizar o JPA no Spring é preciso configurar o EntityManagerFactory. Fazendo uma anologia grosseira, o EntityManagerFactory é equivalente ao SessionFactory em uma configuração pura do Hibernate.
 
@@ -134,7 +134,7 @@ Neste exemplo é utilizado o LocalContainerEntityManagerFactoryBean que suporta 
 * `jpaVendorAdapter:` Configura o Hibernate como o provedor de persistência padrão JPA
 * `jpaProperties:` Configura detalhes para o provedor de pesistência Hibernate
 
-### TransactionManager
+#### TransactionManager
 
 O EntityManagerFactory requer um gerenciador de transações. O Spring fornece o JpaTransactionManager para gerenciar as transações:
 
@@ -147,12 +147,17 @@ O EntityManagerFactory requer um gerenciador de transações. O Spring fornece o
 ```
 A tag `<tx:annotation-driven>` permite o uso de anoatações no código Java para  a demarcação de transações.
 
-### Spring Data JPA Repository
+#### Spring Data JPA Repository
 
 A tag `<jpa:repositories>` configura a localização dos repositórios Spring Data JPA que serão instanciados:
 
 ```XML
 <jpa:repositories base-package="br.com.eof.examples.repositories"/>
 ```
+## Codificação
+
+### Controller
+
+### Repository
 
 
