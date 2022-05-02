@@ -129,10 +129,10 @@ Neste exemplo é utilizado o LocalContainerEntityManagerFactoryBean que suporta 
   </property>
 </bean>
 ```
-* `dataSource:` Configura o bean DataSource
-* `packagesToScan:` Configura a localização das entidades 
-* `jpaVendorAdapter:` Configura o Hibernate como o provedor de persistência padrão JPA
-* `jpaProperties:` Configura detalhes para o provedor de pesistência Hibernate
+* A property `dataSource` configura o bean DataSource
+* A property `packagesToScan` configura a localização das entidades 
+* A property `jpaVendorAdapter` configura o Hibernate como o provedor de persistência padrão JPA
+* A property `jpaProperties` configura detalhes para o provedor de pesistência Hibernate
 
 #### TransactionManager
 
