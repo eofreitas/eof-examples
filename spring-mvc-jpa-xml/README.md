@@ -89,20 +89,10 @@ O WebApplicationContext é o contexto Spring específico para aplicações Web.
 <context:component-scan base-package="br.com.eof.examples" />
 
 <mvc:annotation-driven />
-	
-<mvc:view-controller path="/" view-name="index" />
-
-<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-  <property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
-  <property name="prefix" value="/WEB-INF/views/" />
-  <property name="suffix" value=".jsp" />
-</bean>
 ```
 
 * A tag `<context:component-scan />` instrui para que seja detectado automaticamente as classes com anotações Spring. Habilita implicitamente `<context:annotation-config />` 
 * A tag `<mvc:annotation-driven />` habilita a configuração do Spring MVC
-* `<mvc:view-controller />:` 
-* `viewResolver:`
 
 ## Spring Data JPA (persistence-context.xml)
 
@@ -116,13 +106,13 @@ No DataSource é configurado a fonte de dados com o banco de dados embutido H2:
 <jdbc:embedded-database id="dataSource" type="H2" />
 ```
 
-* `<jdbc:embedded-database />:`
+* A tag `<jdbc:embedded-database />` cria o banco de dados embutido e disponibiliza para o container Spring como um bean do tipo javax.sql.DataSource 
 
 ### EntityManagerFactory
 
 Para utlizar o JPA no Spring é preciso configurar o EntityManagerFactory. Fazendo uma anologia grosseira, o EntityManagerFactory é equivalente ao SessionFactory em uma configuração pura do Hibernate.
 
-É utilizado o LocalContainerEntityManagerFactoryBean que suporta a injeção de DataSource:
+Neste exemplo é utilizado o LocalContainerEntityManagerFactoryBean que suporta a injeção de um DataSource:
 
 ```XML
 <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
@@ -148,9 +138,7 @@ Para utlizar o JPA no Spring é preciso configurar o EntityManagerFactory. Fazen
 
 ### TransactionManager
 
-O EntityManagerFactory requer um gerenciador de transações.
-
-O Spring fornece o JpaTransactionManager para gerenciar as transações:
+O EntityManagerFactory requer um gerenciador de transações. O Spring fornece o JpaTransactionManager para gerenciar as transações:
 
 ```XML
 <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
