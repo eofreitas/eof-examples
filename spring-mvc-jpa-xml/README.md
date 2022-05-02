@@ -2,7 +2,7 @@
 
 Devido a dificuldade que muitos desenvolvedores encontram ao configurar o Spring 5 por meio de configuração XML, é apresentado neste exemplo o passo a passo de como realizar a configuração XML de um projeto Spring 5 MVC com Spring Data JPA.
 
-O objetivo do artigo não é discutir qual é a melhor forma de configurar um projeto Spring 5, e sim apresentar um modelo que pode ser útil em diversos projetos.
+O objetivo do artigo não é ensinar Spring 5 MVC, ou discutir qual é a melhor forma de configurar um projeto Spring 5, e sim apresentar um modelo de configuração de um projeto Spring 5 MVC que pode ser útil para muitos desenvolvedores.
 
 ## POM.XML
 
@@ -56,7 +56,7 @@ O objetivo do artigo não é discutir qual é a melhor forma de configurar um pr
 
 ## Spring MVC
 
-Para o Spring MVC é configurado o DispatcherServlet e o WebApplicationContext.   
+Em um projeto Spring MVC é configurado o DispatcherServlet e o WebApplicationContext.   
 
 ### DispatcherServlet (web.xml)
 
@@ -95,8 +95,6 @@ O WebApplicationContext é o contexto Spring específico para aplicações Web.
 * A tag `<mvc:annotation-driven />` habilita a configuração do Spring MVC
 
 ## Spring Data JPA (persistence-context.xml)
-
-É utilizado o Hibernate como provedor de persistência padrão do JPA.
 
 ### DataSource
 
@@ -156,3 +154,5 @@ A tag `<jpa:repositories>` configura a localização dos repositórios Spring Da
 ```XML
 <jpa:repositories base-package="br.com.eof.examples.repositories"/>
 ```
+
+
