@@ -1,10 +1,10 @@
 # Spring 5 MVC, Spring Data JPA, Configuração XML
+Devido a dificuldade que muitos desenvolvedores encontram ao configurar o Spring 5 por meio de configuração XML, é apresentado neste exemplo o passo a passo de como realizar a configuração XML de um projeto Spring 5 MVC com Spring Data JPA.
 
-Devido a dificuldade que muitos desenvolvedores encontram ao configurar o Spring por meio de configuração XML, é apresentado neste exemplo o passo a passo de como realizar a configuração XML de um projeto Spring 5 MVC com Spring Data JPA.
-
-O objetivo do artigo não é discutir qual é a melhor forma de configurar um projeto Spring 5, e sim apresentar um modelo que pode ser útil em diversos projetos.
+O objetivo do artigo não é ensinar Spring 5 MVC nem Spring Data JPA, e sim apresentar um modelo de configuração de um projeto Spring que pode ser útil para muitos desenvolvedores.
 
 ## POM.XML
+É utilizado o Maven 3 para gerenciar as dependências: 
 
 ```XML
 <dependency>
@@ -51,18 +51,12 @@ O objetivo do artigo não é discutir qual é a melhor forma de configurar um pr
   <version>1.2</version>
 </dependency>
 ```
+## Configuração
+### Spring MVC
+Para utlizar o Spring MVC é preciso configurar o DispatcherServlet e o WebApplicationContext.   
 
-* `spring-webmvc:` 
-* `spring-data-jpa:` 
-* `hibernate-core:`
-* `jackson-databind:` 
-* `h2:`
-* `javax.servlet-api:`
-* `jstl:`
-
-## Spring MVC
-
-### DispatcherServlet (web.xml)
+#### DispatcherServlet (web.xml)
+O DispatcherServlet recebe todas as requisições HTTP e direciona para o controlador.  
 
 ```XML
 <servlet>
@@ -80,56 +74,33 @@ O objetivo do artigo não é discutir qual é a melhor forma de configurar um pr
   <url-pattern>/</url-pattern>
 </servlet-mapping>
 ```
-* `<servlet />:`
-* `<servlet-mapping />:`
+* Com a tag `<servlet />` é declarado o DispatcherServlet
+* Com a tag `<servlet-mapping />` é configurada a URL que será mapeada para o DispatcherServlet. 
 
-
-### Dispatcher Context (dispatcher-context.xml)
+#### Dispatcher Context (dispatcher-context.xml)
+O WebApplicationContext é o contexto Spring específico para aplicações Web.
 
 ```XML
-<context:component-scan base-package="br.com.eof.examples" />	
-
-<context:annotation-config />
+<context:component-scan base-package="br.com.eof.examples" />
 
 <mvc:annotation-driven />
-	
-<mvc:view-controller path="/" view-name="index" />
-
-<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-  <property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
-  <property name="prefix" value="/WEB-INF/views/" />
-  <property name="suffix" value=".jsp" />
-</bean>
 ```
 
-* `<context:component-scan />:` 
-* `<context:annotation-config />:` 
-* `<mvc:annotation-driven />:`
-* `<mvc:view-controller />:` 
-* `viewResolver:`
+* A tag `<context:component-scan />` instrui para que seja detectado automaticamente as classes com anotações Spring e habilita implicitamente `<context:annotation-config />` 
+* A tag `<mvc:annotation-driven />` habilita a configuração do Spring MVC
 
-## Spring Data JPA (persistence-context.xml)
-
-É utilizado o Hibernate como provedor de persistência padrão do JPA. Nos próximos subintens será demostrado a configuração de cada bean.
-
-### DataSource
-
+### Spring Data JPA (persistence-context.xml)
+#### DataSource
 No DataSource é configurado a fonte de dados com o banco de dados embutido H2: 
 
 ```XML
-<jdbc:embedded-database id="dataSource" type="H2">
-  <jdbc:script location="classpath:sql/schema.sql"/>
-  <jdbc:script location="classpath:sql/data.sql"/>
-</jdbc:embedded-database>
+<jdbc:embedded-database id="dataSource" type="H2" />
 ```
 
-* `<jdbc:embedded-database />:`
+* A tag `<jdbc:embedded-database />` cria o banco de dados embutido e disponibiliza para o container Spring como um bean do tipo javax.sql.DataSource 
 
-### EntityManagerFactory
-
-Para utlizar o JPA no Spring é preciso configurar o EntityManagerFactory. Fazendo uma anologia grosseira, o EntityManagerFactory é equivalente ao SessionFactory em uma configuração pura do Hibernate.
-
-É utilizado o LocalContainerEntityManagerFactoryBean que suporta a injeção de DataSource:
+#### EntityManagerFactory
+Para utlizar o JPA no Spring é preciso configurar o EntityManagerFactory. Neste exemplo é utilizado o LocalContainerEntityManagerFactoryBean que suporta a injeção de um DataSource:
 
 ```XML
 <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
@@ -140,22 +111,21 @@ Para utlizar o JPA no Spring é preciso configurar o EntityManagerFactory. Fazen
   </property>
   <property name="jpaProperties">
     <props>
-      <prop key="hibernate.dialect">org.hibernate.dialect.H2Dialect</prop> 
+      <prop key="hibernate.dialect">org.hibernate.dialect.H2Dialect</prop>
+      <prop key="hibernate.hbm2ddl.auto">create-drop</prop>
+      <prop key="hibernate.hbm2ddl.import_files">data.sql</prop>
       <prop key="hibernate.show_sql">true</prop>
     </props>
   </property>
 </bean>
 ```
-* `dataSource:` Configura o bean DataSource
-* `packagesToScan:` Configura a localização das entidades 
-* `jpaVendorAdapter:` Configura o Hibernate como o provedor de persistência padrão JPA
-* `jpaProperties:` Configura detalhes para o provedor de pesistência Hibernate
+* A property `dataSource` configura o bean DataSource
+* A property `packagesToScan` configura a localização das entidades 
+* A property `jpaVendorAdapter` configura o Hibernate como o provedor de persistência padrão JPA
+* A property `jpaProperties` configura detalhes para o provedor de pesistência Hibernate
 
-### TransactionManager
-
-O EntityManagerFactory requer um gerenciador de transações.
-
-O Spring fornece o JpaTransactionManager para gerenciar as transações:
+#### TransactionManager
+O EntityManagerFactory requer um gerenciador de transações que no Spring é fornecido pelo JpaTransactionManager:
 
 ```XML
 <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
@@ -164,12 +134,43 @@ O Spring fornece o JpaTransactionManager para gerenciar as transações:
 
 <tx:annotation-driven />
 ```
-A tag `<tx:annotation-driven>` permite o uso de anoatações no código Java para  a demarcação de transações.
+A tag `<tx:annotation-driven>` permite o uso de anoatações no código Java para a demarcação de transações.
 
-### Spring Data JPA Repository
-
+#### Spring Data JPA Repository
 A tag `<jpa:repositories>` configura a localização dos repositórios Spring Data JPA que serão instanciados:
 
 ```XML
 <jpa:repositories base-package="br.com.eof.examples.repositories"/>
 ```
+## Classes
+### Controller (UserController)
+A classe Controller processa as requisição HTTP encaminhadas pelo DispatcherServlet. A anotação `@RestController` anota implicitamente a classe com `@Controller` e `@ResponseBody`:
+
+```Java
+@RestController
+@RequestMapping("/users")
+public class UserController {
+  private UserService service;
+
+  public UserController(UserService service) {
+    this.service = service;
+  }
+
+  @GetMapping
+  public List<User> getUsers() {
+    return service.findAll();
+  }
+}
+```
+Uma requisição HTTP GET para a URL `http://127.0.0.1:8080/spring-mvc/users` será direcionada para o método `getUsers()`. 
+
+### Repository (UserRepository)
+A classe Respository faz a interface com a base de dados como uma instancia do Spring Data JPA:
+
+```Java
+@Repository
+public interface UserRepository extends JpaRepository<User, Long> {
+	
+}
+```
+Ao extender a interface `JpaRepository`, que é um `CrudRepository`com mais funcionalidades, automaticamente o Spring Data JPA instacia uma implementação de UserRepository com todos os métodos de acesso a base dados construídos.
