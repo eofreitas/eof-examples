@@ -9,7 +9,7 @@
 
 	<import resource="persistence-context.xml"/>
 	
-	<context:component-scan base-package="br.com.eof.examples" />
+	<context:component-scan base-package="br.com.eof.examples.springmvc" />
 	
 	<mvc:annotation-driven />
 	
