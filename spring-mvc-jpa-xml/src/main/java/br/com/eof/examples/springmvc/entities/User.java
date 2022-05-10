@@ -1,4 +1,4 @@
-package br.com.eof.examples.entities;
+package br.com.eof.examples.springmvc.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

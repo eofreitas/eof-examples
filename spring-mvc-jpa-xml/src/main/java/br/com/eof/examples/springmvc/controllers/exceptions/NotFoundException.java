@@ -1,4 +1,4 @@
-package br.com.eof.examples.controllers.exceptions;
+package br.com.eof.examples.springmvc.controllers.exceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

@@ -1,4 +1,4 @@
-package br.com.eof.examples.controllers;
+package br.com.eof.examples.springmvc.controllers;
 
 import java.util.List;
 
@@ -7,9 +7,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.eof.examples.controllers.exceptions.NotFoundException;
-import br.com.eof.examples.entities.User;
-import br.com.eof.examples.services.UserService;
+import br.com.eof.examples.springmvc.controllers.exceptions.NotFoundException;
+import br.com.eof.examples.springmvc.entities.User;
+import br.com.eof.examples.springmvc.services.UserService;
 
 @RestController
 @RequestMapping("/users")

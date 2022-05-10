@@ -1,4 +1,4 @@
-package br.com.eof.examples.services;
+package br.com.eof.examples.springmvc.services;
 
 import java.util.List;
 import java.util.Optional;
@@ -6,8 +6,8 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import br.com.eof.examples.entities.User;
-import br.com.eof.examples.repositories.UserRepository;
+import br.com.eof.examples.springmvc.entities.User;
+import br.com.eof.examples.springmvc.repositories.UserRepository;
 
 @Transactional
 @Service
