@@ -81,7 +81,7 @@ O DispatcherServlet recebe todas as requisições HTTP e direciona para o contro
 O WebApplicationContext é o contexto Spring específico para aplicações Web.
 
 ```XML
-<context:component-scan base-package="br.com.eof.examples" />
+<context:component-scan base-package="br.com.eof.examples.springmvc" />
 
 <mvc:annotation-driven />
 ```
@@ -105,7 +105,7 @@ Para utlizar o JPA no Spring é preciso configurar o EntityManagerFactory. Neste
 ```XML
 <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
   <property name="dataSource" ref="dataSource" />
-  <property name="packagesToScan" value="br.com.eof.examples.entities"/>
+  <property name="packagesToScan" value="br.com.eof.examples.springmvc.entities"/>
   <property name="jpaVendorAdapter">
     <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"/>
   </property>
@@ -140,7 +140,7 @@ A tag `<tx:annotation-driven>` permite o uso de anoatações no código Java par
 A tag `<jpa:repositories>` configura a localização dos repositórios Spring Data JPA que serão instanciados:
 
 ```XML
-<jpa:repositories base-package="br.com.eof.examples.repositories"/>
+<jpa:repositories base-package="br.com.eof.examples.springmvc.repositories"/>
 ```
 ## Classes
 ### Controller (UserController)
